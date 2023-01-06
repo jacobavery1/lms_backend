@@ -9,13 +9,13 @@ module.exports = {
             return data.queryCourses.getCoursesByUser(contextValue)
         }, 
         course: async (parent, args, contextValue) => {
-
+            return data.queryCourses.getCourseById(args, contextValue)
         }, 
-        students: async (parent, args, contextVale) => {
-
+        students: async (parent, args, contextValue) => {
+            return data.queryUsers.getStudents(args, contextValue)
         }, 
         student: async (parent, args, contextValue) => {
-
+            return data.queryUsers.getStudent(args, contextValue)
         }, 
         assignments: async (parent, args, contextValue) => {
             return data.queryCourses.getAssignmentsByCourse(args, contextValue)

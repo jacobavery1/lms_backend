@@ -26,6 +26,24 @@ module.exports = {
         }
     }, 
 
+    getCourseById: async (args, contextValue) => {
+        const ROLE = contextValue.role 
+        if (ROLE == "admin") {
+            const data = await db.courses.findByPk(args._id)
+            return data 
+        } else {
+            const database = ROLE == "student" ? "students" : "teachers"
+            const courses = await utils.getUserCourses(database, contextValue._id)
+
+            if (courses?.includes(args._id)) {
+                const data = await db.courses.findByPk(args._id)
+                return data
+            } else {
+                return null
+            }
+        }
+    }, 
+
     getAssignmentsByCourse: async (args, contextVale) => {
         const ROLE = contextVale.role 
         if (ROLE == "admin") {
