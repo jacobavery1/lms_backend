@@ -1,44 +1,55 @@
-const auth = require('./authentication/auth')
-const data = require('./data/index')
-const db = require('../database/connection')
-
-// handle a jwt expired error 
 module.exports = {
     Query: {
         courses: async (parent, args, contextValue) => {
-            return data.queryCourses.getCoursesByUser(contextValue)
+            return contextValue.courses.getCourses()
         }, 
         course: async (parent, args, contextValue) => {
-            return data.queryCourses.getCourseById(args, contextValue)
+            return contextValue.courses.getCourse(args)
         }, 
         students: async (parent, args, contextValue) => {
-            return data.queryUsers.getStudents(args, contextValue)
+            return contextValue.users.getStudents()
         }, 
         student: async (parent, args, contextValue) => {
-            return data.queryUsers.getStudent(args, contextValue)
+            return contextValue.users.getStudent(args)
         }, 
-        assignments: async (parent, args, contextValue) => {
-            return data.queryCourses.getAssignmentsByCourse(args, contextValue)
+        teachers: async () => {
+
         }, 
-        assignment: async (parent, args, contextValue) => {
-            return data.queryCourses.getAssignmentById(args, contextValue)
+        teacher: async () => {
+
         }
     }, 
     Mutation: {
         login: async (parent, args, contextValue) => {
-            return auth.login(args)
+            return contextValue.auth.login(args)
         }, 
         signup: async (parent, args, contextValue) => {
-            return auth.signup(args)
+            return contextValue.auth.signup(args)
         }
 
     }, 
     Course: {
         modules: async (parent, args, contextValue) => {
-            return data.queryParent.getModulesFromParent(parent)
+            return contextValue.courses.getModulesInCourse(parent)
         }, 
-        students: async (parent, args, contextVale) => {
-            return data.queryParent.getStudentsFromParent(parent)
+        students: async (parent, args, contextValue) => {
+            return contextValue.courses.getStudentsInCourse(parent)
+        }, 
+        assignments: async (parent, args, contextValue) => {
+            return contextValue.courses.getAssignmentsInCourse(parent)
+        }
+    }, 
+    Assignment: {
+        submissions: async (parent, args, contextValue) => {
+            return contextValue.courses.getSubmissionsInAssignment(parent)
+        }
+    }, 
+    Module: {
+        posts: async (parent, args, contextValue) => {
+            return contextValue.courses.getPostsInModule(parent) 
+        }, 
+        assignments: async (parent, args, contextValue) => {
+            return contextValue.courses.getAssignmentsInModule(parent)
         }
     }
 }

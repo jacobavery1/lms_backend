@@ -1,7 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize')
 require('dotenv').config()
 
-const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING)
+const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING, {
+    logging: false
+})
 
 module.exports = {
     admin: require('./admin')(sequelize, DataTypes), 

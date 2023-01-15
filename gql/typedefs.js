@@ -3,47 +3,42 @@ module.exports = `
         courses: [Course]
         course(_id: ID!): Course
 
-
-        # get assignments and individual assignments 
-        assignments(course_id: ID!): [Assignment]
-        assignment(assignment_id: ID!): Assignment
-
-        #posts(module_id: ID!): [Post]
-        #post(_id: ID!): Post
-
-        # submission 
-        #submitted_document 
-        # annoucnemnt 
-
-        
         students: [Student]
         student(_id: ID!): Student
 
-        # teachers 
-        # teacher 
+        teachers: [Teacher]
+        teacher(_id: ID!): Teacher
 
         # admins 
         # admin
+
+        # announcement 
+        # assignment 
+        # grade 
+        # module 
+        # post 
+        # submission 
+        # submitted document 
     }
     type Mutation {
         login(username: String!, password: String!, role: String!): AuthPayload
         
         signup(firstname: String!, lastname: String!, username: String!, password: String!, role: String!): AuthPayload
 
-        # setcourse 
+        # set/delete course 
 
-        # set module  
+        # set/delete module  
 
-        # set post 
+        # set/delete post 
 
-        # set assingment 
+        # set/delete assingment 
 
-        # set media 
+        # set/delete media 
 
-        # setstudent 
-        # add courses to studetn 
+        # set/delete student 
+        # add courses to studet 
 
-        # setteacher 
+        # set/delete teacher 
         # add courses to teacher 
 
         # setadmin
@@ -62,7 +57,8 @@ module.exports = `
         course_home_html: String
         students: [Student]
         modules: [Module]
-         
+        assignments: [Assignment]
+        # announcements 
     }
     type Student {
         _id: ID!
@@ -70,7 +66,13 @@ module.exports = `
         firstname: String
         lastname: String 
         username: String 
-        student_password: String 
+        courses: [String]
+    }
+    type Teacher {
+        _id: ID!
+        firstname: String 
+        lastname: String
+        usersname: String 
         courses: [String]
     }
     type Module {
@@ -79,8 +81,8 @@ module.exports = `
         course_order: Int 
         module_name: String 
         dispaly: Boolean
-        # posts 
-        # assignments 
+        posts: [Post]
+        assignments: [Assignment]
     }
     type Post {
         _id: ID!
@@ -102,7 +104,7 @@ module.exports = `
         assigned_date: String 
         due_date: String
         assignment_description_html: String
-        # submissions 
+        submissions: [Submission] 
         # submitted documents 
     }
     type Submission {
