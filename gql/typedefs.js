@@ -25,21 +25,33 @@ module.exports = `
         
         signup(firstname: String!, lastname: String!, username: String!, password: String!, role: String!): AuthPayload
 
-        # set/delete course 
+        # update/delete/create course 
+        
+        createCourse(course_name: String!, course_home_html: String): Course
+        
+        addStudentToCourse(student_id: ID!, course_id: ID!): Course
+        addTeacherToCourse(teacher_id: ID!, course_id: ID!): Course
 
-        # set/delete module  
+        removeStudentFromCourse(student_id: ID!, course_id: ID!): Course 
+        removeTeacherFromCourse(student_id: ID!, course_id: ID!): Course
 
-        # set/delete post 
 
-        # set/delete assingment 
+        # update/delete module  
+        createModule(course_id: ID!, module_name: String!, display: Boolean!): Module 
 
-        # set/delete media 
+        # update/delete post 
+        createPost(course_id: ID!, module_id: ID!, display: Boolean!, post_name: String!, post_date: String, post_description_html: String!): Post
 
-        # set/delete student 
-        # add courses to studet 
+        # update/delete assingment 
+        createAssignment(course_id: ID!, module_id: ID!, display: Boolean!, assignment_name: String!, assigned_date: String!, due_date: String, assignment_description_html: String!): Assignment
 
-        # set/delete teacher 
-        # add courses to teacher 
+        # update/delete media 
+
+        # update/delete student 
+         
+
+        # update/delete teacher 
+         
 
         # setadmin
     }
@@ -58,7 +70,7 @@ module.exports = `
         students: [Student]
         modules: [Module]
         assignments: [Assignment]
-        # announcements 
+        announcements: [Announcement]
     }
     type Student {
         _id: ID!
@@ -105,7 +117,7 @@ module.exports = `
         due_date: String
         assignment_description_html: String
         submissions: [Submission] 
-        # submitted documents 
+        submitted_documents: [SubmittedDocument]
     }
     type Submission {
         _id: ID!

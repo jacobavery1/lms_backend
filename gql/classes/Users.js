@@ -64,6 +64,28 @@ class Users extends Query {
             }
         }
     }
+
+    async getTeachers() {
+        if (this.role == "admin") {
+            const teachers = await this.db.teachers.findAll()
+            return teachers
+        }
+    }
+
+    async getTeacher(args) {
+        const _id = args._id
+        if (this.role == "admin") {
+            const teacher = await this.db.teachers.findOne({
+                where: {
+                    _id: _id
+                }
+            })
+            return teacher
+        }
+    }
+
+
+
 }
 
 module.exports = Users

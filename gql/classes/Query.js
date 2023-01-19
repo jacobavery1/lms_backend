@@ -55,6 +55,11 @@ class Query {
         return items
     }
 
+    async createItem(dbName, attributes) {
+        const item = this.db[dbName].create(attributes)
+        return item
+    }
+
     userHasCourse(courseId) {
         return this.user.courses?.includes(courseId)
     }
