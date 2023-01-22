@@ -51,6 +51,8 @@ module.exports = `
          
 
         # update/delete teacher 
+
+        #update/create/delete submission/ submitted document 
          
 
         # setadmin
@@ -84,7 +86,7 @@ module.exports = `
         _id: ID!
         firstname: String 
         lastname: String
-        usersname: String 
+        username: String 
         courses: [String]
     }
     type Module {
