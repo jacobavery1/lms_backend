@@ -31,9 +31,7 @@ module.exports.login = async (args) => {
             let token = jwt.sign({
                 _id: data._id, 
                 role
-            }, process.env.AUTH_KEY, {
-                expiresIn: 86400
-            })
+            }, process.env.AUTH_KEY)
 
             return {
                 message: `${role} successfully accessed.`,
